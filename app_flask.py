@@ -1,4 +1,4 @@
-# app_flask.py #%74
+# app_flask.py 
 from flask import Flask, request, jsonify, render_template
 import torch
 from app.models.cnn_model import DiseaseCNN 
@@ -7,7 +7,7 @@ from PIL import Image
 from torchvision import transforms
 
 app = Flask(__name__)
-
+# Plants and disease names.
 class_names = [
     "Pepper_bell_Bacterial_spot",
     "Pepper_bell_healthy",
@@ -25,12 +25,12 @@ class_names = [
 ]
 
 
-# Upload model
+# Upload model.
 model = DiseaseCNN(total_classes=13, rate=0.4)
 model.load_state_dict(torch.load("trained_model/plant_disease_detection.pt", map_location=torch.device("cpu")))
 model.eval()
 
-# first, we define images
+# Firstly, we define images.
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.ToTensor(),
@@ -39,7 +39,7 @@ transform = transforms.Compose([
 ])
 
 
-# main page route
+# Main page route.
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -47,11 +47,13 @@ def home():
 def predict():
     file = request.files['image']
     image = Image.open(io.BytesIO(file.read())).convert('RGB')
-    input_tensor = transform(image).unsqueeze(0)  # Add batch dimension
+    # Adds a batch size to the tensor.
+    input_tensor = transform(image).unsqueeze(0) 
 
     with torch.no_grad():
-        output = model(input_tensor)  # Use input_tensor here
+        output = model(input_tensor) 
         predicted_class = torch.argmax(output, dim=1).item()
+        # Converts class index to text label.
         predicted_label = class_names[predicted_class]
     
     return jsonify({
