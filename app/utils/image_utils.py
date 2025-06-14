@@ -1,4 +1,4 @@
-# app/utils/image_utils.py %19 ai
+# app/utils/image_utils.py 
 import os
 from PIL import Image
 import matplotlib.pyplot as plt

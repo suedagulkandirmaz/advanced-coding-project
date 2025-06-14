@@ -2,8 +2,5 @@
 AppData/
 *.log
 *.old
-trained_model/plant_disease_detection.pt
-trained_model/
-trained_model/
-*.pt
+
 

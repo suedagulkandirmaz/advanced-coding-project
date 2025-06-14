@@ -1,4 +1,4 @@
-import torch.nn as nn #bak tekrar %52 ai
+import torch.nn as nn 
 import torch 
 
 class DiseaseCNN(nn.Module):
