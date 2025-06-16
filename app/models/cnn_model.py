@@ -1,4 +1,4 @@
-import torch.nn as nn 
+import torch.nn as nn   
 import torch 
 
 class DiseaseCNN(nn.Module):
