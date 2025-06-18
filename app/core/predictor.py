@@ -46,7 +46,7 @@ def train_model(model, train_loader, validation_loader, epoch_number, device, mo
 
             loop.set_postfix(loss=loss.item(), acc=100 * correct / total)
 
-        validation_acc = evalidationuate_training_model(model, validation_loader, device)
+        validation_acc = evaluate_training_model(model, validation_loader, device)
 
         print(f"Epoch {epoch+1}/{epoch_number} - Train Loss: {total_loss:.4f}, validation Acc: {validation_acc:.2f}%")
 
@@ -56,7 +56,7 @@ def train_model(model, train_loader, validation_loader, epoch_number, device, mo
             is_saved(model, model_path)
             print("Model is saved with accuracy.")
 
-def evalidationuate_training_model(model, data_loader, device):
+def evaluate_training_model(model, data_loader, device):
     model.evalidation()
     correct = 0
     total = 0
